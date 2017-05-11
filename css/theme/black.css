@@ -60,7 +60,9 @@ body {
 }
 
 .reveal h2 {
-  font-size: 1.6em; }
+  font-size: 1.6em;
+  font-family: "Nothing You Could Do", Helvetica, sans-serif;
+}
 
 .reveal h3 {
   font-size: 1.3em; }
