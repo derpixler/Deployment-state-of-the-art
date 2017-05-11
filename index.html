@@ -124,17 +124,24 @@
 								</td>
 							</tr>
 						</table>
+
+						<aside class="notes">
+							<p>Datei für Datei!</p>
+							<p>Gefahr: dateien können überschreiben oder gelöscht werden, kein überblick über veränderungen (außer datum)</p>
+
+						</aside>
 					</section>
 					<section>
 						<h2>Via Commandline (CLI)</h2>
 
-						<h5>SFTP - Secure File Transfer Protocol</h5>
-						<pre><code class="hljs">sftp -P 42022 ~/development/db_dump rene.reimann@10.111.26.61:/home/dev_db_sync/db_dump/cts_seo.sql</code></pre>
-
-
-						<h5>SCP - Secure Copy</h5>
-						<pre><code class="hljs">scp -P 42022 ~/development/db_dump rene.reimann@10.111.26.61:/home/dev_db_sync/db_dump/cts_seo.sql</code></pre>
-
+						<div class="fragment">
+							<h5>SFTP - Secure File Transfer Protocol</h5>
+							<pre><code class="hljs">sftp -P 42022 ~/development/db_dump rene.reimann@10.111.26.61:/home/dev_db_sync/db_dump/cts_seo.sql</code></pre>
+						</div>
+						<div class="fragment">
+							<h5>SCP - Secure Copy</h5>
+							<pre><code class="hljs">scp -P 42022 ~/development/db_dump rene.reimann@10.111.26.61:/home/dev_db_sync/db_dump/cts_seo.sql</code></pre>
+						</div>
 						<aside class="notes">
 
 						</aside>
@@ -143,8 +150,14 @@
 				</section>
 
 				<section data-background="img/wcber_slide_5.jpg">
+					<h2>Deployment like a Pro</h2>
 
-					<pre><code class="hljs">echo 'foo';</code></pre>
+					<h5 class="fragment">Möglichkeiten</h5>
+					<ul>
+						<li class="fragment">
+							Programme mit Sync-Function:
+						</li>
+					</ul>
 
 				</section>
 
