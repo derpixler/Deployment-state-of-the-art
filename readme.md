@@ -1,2 +1,2 @@
 Hier findest du meine Slides zur Deployment session.
-(https://github.com/derpixler/Deployment-state-of-the-art/blob/master/img/feakterminal.gif?raw=true "Logo Title Text 1")
+![alt text](https://raw.githubusercontent.com/derpixler/Deployment-state-of-the-art/master/img/feakterminal.gif "Logo Title Text 1")
