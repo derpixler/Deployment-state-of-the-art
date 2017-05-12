@@ -1385,3 +1385,19 @@ body {
 
 .zoomed .reveal .roll span:after {
   visibility: hidden; }
+
+/*********************************************
+ * Terminal
+ *********************************************/
+
+.reveal .terminal{
+  background:rgba(0, 0, 0, 0.56);
+  color:darkgrey;
+  font-family: monospace, sans-serif;
+  padding: 3%;
+  height:500px
+}
+
+.reveal .terminal .highlight{
+  color: #21ff37;
+}

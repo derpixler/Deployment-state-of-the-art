@@ -7,6 +7,7 @@
 		<title>Deployment - state of the art - #wcber15 #dollertyp #DevOps #WordPress</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/typed.css">
 		<link rel="stylesheet" href="css/theme/black.css">
 
 		<!-- Theme used for syntax highlighting of code -->
@@ -24,6 +25,28 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
+
+				<section data-background="img/wcber_slide_1.jpg">
+					<div class="typecontent" id="line1">
+						<span>dep deploy</span>
+					</div>
+					<pre class="terminal type-wrap">
+Last login: Thu May 13 16:11:04 on wcber13052017
+renereimann$@wcber:~ $ <span id="typed" style="white-space:pre;"></span>
+<span class="fragment"><span class="highlight">✔</span> Executing task <span class="highlight">deploy:prepare</span></span>
+<span class="fragment"><span class="highlight">✔</span> Executing task <span class="highlight">deploy:release</span></span>
+<span class="fragment"><span class="highlight">✔</span> Executing task <span class="highlight">deploy:update_code</span></span>
+<span class="fragment"><span class="highlight">✔</span> Executing task <span class="highlight">deploy:shared</span></span>
+<span class="fragment"><span class="highlight">✔</span> Executing task <span class="highlight">deploy:vendors</span></span>
+<span class="fragment"><span class="highlight">✔</span> Executing task <span class="highlight">deploy:migrate</span></span>
+<span class="fragment"><span class="highlight">✔</span> Executing task <span class="highlight">deploy:warmup</span></span>
+<span class="fragment"><span class="highlight">✔</span> Executing task <span class="highlight">deploy:symlink</span></span>
+<span class="fragment"><span class="highlight">✔</span> Executing task <span class="highlight">cleanup</span></span>
+<span class="fragment"><span class="highlight">Successfully deployed!</span>
+					</pre>
+
+				</section>
+
 				<section data-background="img/wcber_slide_1.jpg">
 					<h1>Deployment</h1>
 					<h5>state of the art </h5>
@@ -150,26 +173,47 @@
 				</section>
 
 				<section data-background="img/wcber_slide_5.jpg">
-					<h2>Deployment like a Pro</h2>
+					<section>
+						<h1>Deployment like a Pro</h1>
+					</section>
+					<section>
+						<h3>Deployment Möglichkeiten</h3>
+						<h5 class="fragment">easy</h5>
+						<h5 class="fragment">semieasy</h5>
+						<h5 class="fragment">fullstack</h5>
+					</section>
+					<section>
+						<h1>Deployment easy</h1>
+						<h5 class="fragment">FTP-Programme mit Sync-Function: Transmit (mac)</h5>
+						<img class="fragment" src="img/transmit.png" style="border:0;width: 650px;background: none;box-shadow:inherit"/>
 
-					<h5 class="fragment">Möglichkeiten</h5>
-					<ul>
-						<li class="fragment">
-							Programme mit Sync-Function:
-						</li>
-					</ul>
+					</section>
+					<section>
 
-				</section>
+						<h5>Commandline Tools: rsync</h5>
+						<pre class="fragment"><code class="hljs">$ rsync -a -e ssh root@192.168.0.100:/folder1/ /folder2/</code></pre>
+					</section>
 
-				<section data-background="img/wcber_slide_6.jpg">
+					<section>
 
-					<pre><code class="hljs">echo 'foo';</code></pre>
+						<h2>Vorteile</h2>
+						<ul>
+							<li class="fragment">Sehr einfach in der Hanhabung</li>
+							<li class="fragment">Keine tiefergehendes Wissen nötig.</li>
+						</ul>
 
-				</section>
+					</section>
 
-				<section data-background="img/wcber_slide_7.jpg">
+					<section>
 
-					<pre><code class="hljs">echo 'foo';</code></pre>
+						<h2>Nachteile</h2>
+						<ul>
+							<li class="fragment">Wenig Kontrolle</li>
+							<li class="fragment">Rollback Kompliziert</li>
+							<li class="fragment">Fehlerquote hoch</li>
+						</ul>
+
+					</section>
 
 				</section>
 
@@ -178,6 +222,7 @@
 
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.js"></script>
+		<script src="js/typed.js"></script>
 
 		<script>
 			// More info about config & dependencies:
@@ -191,6 +236,36 @@
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
 				]
 			});
+		</script>
+		<script>
+            document.addEventListener('keypress', function(e){
+                    var key = e.which || e.keyCode;
+                    if (key === 119) { // 13 is enter
+                        Typed.new("#typed", {
+                            stringsElement: document.getElementById('line1'),
+                            typeSpeed: 20,
+                            backDelay: 500,
+                            loop: false,
+                            contentType: 'html', // or text
+                            // defaults to null for infinite loop
+                            loopCount: null,
+                            callback: function(){ foo(); },
+                            resetCallback: function() { newTyped(); }
+                        });
+
+                        var resetElement = document.querySelector('.reset');
+                        if(resetElement) {
+                            resetElement.addEventListener('click', function() {
+                                document.getElementById('typed')._typed.reset();
+                            });
+                        }
+                    }
+            });
+
+            function newTyped(){ /* A new typed object */ }
+
+            function foo(){ console.log("Callback"); }
+
 		</script>
 	</body>
 </html>
