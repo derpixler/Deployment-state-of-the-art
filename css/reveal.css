@@ -1401,3 +1401,7 @@ body {
 .reveal .terminal .highlight{
   color: #21ff37;
 }
+
+.reveal .terminal .highlight.yellow{
+  color: #FFE900;
+}

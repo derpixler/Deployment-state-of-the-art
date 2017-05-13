@@ -26,26 +26,7 @@
 		<div class="reveal">
 			<div class="slides">
 
-				<section data-background="img/wcber_slide_1.jpg">
-					<div class="typecontent" id="line1">
-						<span>dep deploy</span>
-					</div>
-					<pre class="terminal type-wrap">
-Last login: Thu May 13 16:11:04 on wcber13052017
-renereimann$@wcber:~ $ <span id="typed" style="white-space:pre;"></span>
-<span class="fragment"><span class="highlight">✔</span> Executing task <span class="highlight">deploy:prepare</span></span>
-<span class="fragment"><span class="highlight">✔</span> Executing task <span class="highlight">deploy:release</span></span>
-<span class="fragment"><span class="highlight">✔</span> Executing task <span class="highlight">deploy:update_code</span></span>
-<span class="fragment"><span class="highlight">✔</span> Executing task <span class="highlight">deploy:shared</span></span>
-<span class="fragment"><span class="highlight">✔</span> Executing task <span class="highlight">deploy:vendors</span></span>
-<span class="fragment"><span class="highlight">✔</span> Executing task <span class="highlight">deploy:migrate</span></span>
-<span class="fragment"><span class="highlight">✔</span> Executing task <span class="highlight">deploy:warmup</span></span>
-<span class="fragment"><span class="highlight">✔</span> Executing task <span class="highlight">deploy:symlink</span></span>
-<span class="fragment"><span class="highlight">✔</span> Executing task <span class="highlight">cleanup</span></span>
-<span class="fragment"><span class="highlight">Successfully deployed!</span>
-					</pre>
 
-				</section>
 
 				<section data-background="img/wcber_slide_1.jpg">
 					<h1>Deployment</h1>
@@ -214,6 +195,184 @@ renereimann$@wcber:~ $ <span id="typed" style="white-space:pre;"></span>
 						</ul>
 
 					</section>
+
+					<section>
+						<h1>Deployment semieasy</h1>
+						<h5 class="fragment">Vorbereitung: <span class="fragment">mit Composer Projekte bauen</span></h5>
+						<pre class="fragment" style="font-size: 10px"><code class="hljs">{
+ {
+ "name": "WordPress Playground",
+ "description": "Build a Wordpress Project",
+ "license": "GPL-3.0+",
+ "homepage": "https://github.com/derpixler/Deployment-state-of-the-art",
+ "authors": [ {
+    "name": "Rene Reimann",
+    "homepage": "http://rene-reimann.de",
+    "email": "info@rene-reimann.de",
+    "role": "Developer"
+ 	} ],
+ "repositories": [ {
+    "type": "composer",
+    "url": "https://wpackagist.org"
+ 	} ],
+ "require": {
+    "php": ">=5.3.0",
+    "johnpbloch/wordpress-core-installer": "~0.2",
+    "johnpbloch/wordpress-core": "4.*",
+    "wpackagist-plugin/stream": "3.2.0",
+    "wpackagist-plugin/backwpup": "3.3.*"
+ },
+ "extra": {
+    "wordpress-install-dir": "html/wp-core",
+	"installer-paths": {
+    	"html/wp-content/plugins/{$name}/": ["type:wordpress-plugin"],
+    	"html/wp-content/themes/{$name}/": ["type:wordpress-theme"]
+	}
+ },
+ "scripts" : {
+    "post-install-cmd": "./prepare.sh",
+	"post-update-cmd": "./prepare.sh"
+ }
+}
+}</code></pre>
+
+					</section>
+
+					<section>
+					<pre><code class="hljs">
+{
+ "name": "WordPress Playground",
+ "description": "Build a Wordpress Project",
+ "license": "GPL-3.0+",
+ "homepage": "https://github.com/derpixler/Deployment-state-of-the-art",
+ "authors": [ {
+    "name": "Rene Reimann",
+    "homepage": "http://rene-reimann.de",
+    "email": "info@rene-reimann.de",
+    "role": "Developer"
+ 	} ],
+						</code></pre>
+
+					</section>
+
+					<section>
+					<pre><code class="hljs">"repositories": [ {
+    "type": "composer",
+    "url": "https://wpackagist.org"
+ 	} ],
+ "require-dev": {
+    "wpackagist-plugin/stream": "3.2.0"
+ },
+ "require": {
+    "johnpbloch/wordpress-core-installer": "~0.2",
+    "johnpbloch/wordpress-core": "4.*",
+    "wpackagist-plugin/stream": "3.2.0",
+    "wpackagist-plugin/backwpup": "3.3.*"
+ },</code></pre>
+
+					</section>
+
+					<section>
+					<pre><code class="hljs">
+
+ "extra": {
+    "wordpress-install-dir": "html/wp-core",
+    "installer-paths": {
+        "html/wp-content/plugins/{$name}/": ["type:wordpress-plugin"],
+        "html/wp-content/themes/{$name}/": ["type:wordpress-theme"]
+	}
+ },
+ "scripts" : {
+    "post-install-cmd": "./prepare.sh",
+	"post-update-cmd": "./prepare.sh"
+}
+						</code></pre>
+
+					</section>
+
+					<section>
+						<h5>Projekt mit Composer installieren & aktualisieren</span></h5>
+						<pre class="fragment terminal type-wrap" style="font-size: 20px">Last login: Sat May 13 12:20:04 on wcber13052017
+rener$@local:~ $<span class="fragment"> ssh rene@123.456.78.910</span>
+<span class="fragment">rene@server: $ cd /var/www/</span>
+<span class="fragment">rene@server: $ git clone https://github.com/...easy-wordpress..</span>
+<span class="fragment">rene@server: $ <span class="fragment">composer install</span></span>
+<span class="fragment"><span class="highlight">Loading composer repositories with package information</span></span>
+<span class="fragment"><span class="highlight">Updating dependencies (including require-dev)</span></span>
+<span class="fragment">  - Installing <span class="highlight">composer/installers</span> (<span class="highlight yellow">v1.3.0</span>)
+    Loading from cache
+</span>
+<span class="fragment">  - Installing <span class="highlight">johnpbloch/wordpress-core-installer</span> (<span class="highlight yellow">0.2.1</span>)
+    Loading from cache
+</span>
+<span class="fragment">  - Installing <span class="highlight">johnpbloch/wordpress-core</span> (<span class="highlight yellow">4.7.4.1</span>)
+    Cloning b58505c58043c5e569b5d119878f8e8c1d5f51e4
+</span>
+<span class="fragment">  - Installing <span class="highlight">wpackagist-plugin/stream</span> (<span class="highlight yellow">3.2.0</span>)
+    Downloading: 100%
+</span>
+<span class="fragment">  - Installing <span class="highlight">wpackagist-plugin/backwpup</span> (<span class="highlight yellow">3.3.7</span>)
+    Loading from cache
+</span>
+					</section>
+
+					<section>
+					<pre class="terminal type-wrap" style="font-size: 20px">
+<span class="highlight">Writing lock file</span>
+<span class="fragment"><span class="highlight">Generating autoload files</span></span>
+
+<span class="fragment">> ./prepare.sh
+  - Copy <span class="highlight">wp-config.php.dist</span> -> <span class="highlight">vagrant/html/wp-config.php</span>
+    Files copied	</span>
+					</pre>
+						<p class="fragment" style="font-size: 25px">https://github.com/derpixler/easy-wordpress-composer-install</p>
+					</section>
+
+					<section>
+						<h5>Die Installation</span></h5>
+						<pre class="fragment terminal type-wrap" style="font-size: 20px">
+-rw-r--r--@ 1 renereimann  staff   946 13 Mai 12:52 <span class="highlight">composer.json</span>
+-rw-r--r--  1 renereimann  staff  8617 13 Mai 12:43 <span class="highlight">composer.lock</span>
+-rwxr-xr-x@ 1 renereimann  staff   553 13 Mai 12:42 <span class="highlight">prepare.sh</span>
+-rw-r--r--@ 1 renereimann  staff  2919 13 Mai 12:50 <span class="highlight">wp-config.php.dist</span>
+drwxr-xr-x  5 renereimann  staff   170 13 Mai 12:43 <span class="highlight">html</span>
+drwxr-xr-x  5 renereimann  staff   170 13 Mai 12:43 <span class="highlight">vendor</span>
+<span class="fragment">
+-rw-r--r--@  1 renereimann  staff  2853 13 Mai 06:43 <span class="highlight">wp-config.php</span>
+drwxr-xr-x   3 renereimann  staff   102 13 Mai 06:43 <span class="highlight">wp-content</span>
+drwxr-xr-x  22 renereimann  staff   748 13 Mai 06:43 <span class="highlight">wp-core</span>
+</span>
+					</pre>
+					</section>
+
+					<section data-background="img/wcber_slide_1.jpg">
+						<div class="typecontent" id="line1">
+							<span>dep deploy</span>
+						</div>
+						<pre class="terminal type-wrap">
+Last login: Sat May 13 12:23:04 on wcber13052017
+renereimann$@wcber:~ $ <span id="typed" style="white-space:pre;"></span>
+<span class="fragment"><span class="highlight">✔</span> Executing task <span class="highlight">deploy:prepare</span></span>
+<span class="fragment"><span class="highlight">✔</span> Executing task <span class="highlight">deploy:lock</span></span>
+<span class="fragment"><span class="highlight">✔</span> Executing task <span class="highlight">deploy:backup_db</span></span>
+<span class="fragment"><span class="highlight">✔</span> Executing task <span class="highlight">deploy:unittests</span></span>
+<span class="fragment"><span class="highlight">✔</span> Executing task <span class="highlight">deploy:release</span></span>
+<span class="fragment"><span class="highlight">✔</span> Executing task <span class="highlight">deploy:update_code</span></span>
+<span class="fragment"><span class="highlight">✔</span> Executing task <span class="highlight">deploy:gulp</span></span>
+<span class="fragment"><span class="highlight">✔</span> Executing task <span class="highlight">deploy:shared</span></span>
+<span class="fragment"><span class="highlight">✔</span> Executing task <span class="highlight">deploy:vendors</span></span>
+<span class="fragment"><span class="highlight">✔</span> Executing task <span class="highlight">deploy:migrate</span></span>
+<span class="fragment"><span class="highlight">✔</span> Executing task <span class="highlight">deploy:warmup</span></span>
+<span class="fragment"><span class="highlight">✔</span> Executing task <span class="highlight">deploy:symlink</span></span>
+<span class="fragment"><span class="highlight">✔</span> Executing task <span class="highlight">deploy:update_wp_config</span></span>
+<span class="fragment"><span class="highlight">✔</span> Executing task <span class="highlight">deploy:update_plugins_themes</span></span>
+<span class="fragment"><span class="highlight">✔</span> Executing task <span class="highlight">deploy:unlock</span></span>
+<span class="fragment"><span class="highlight">✔</span> Executing task <span class="highlight">cleanup</span></span>
+<span class="fragment"><span class="highlight">Successfully deployed!</span>
+					</pre>
+
+					</section>
+
 
 				</section>
 
