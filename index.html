@@ -26,8 +26,6 @@
 		<div class="reveal">
 			<div class="slides">
 
-
-
 				<section data-background="img/wcber_slide_1.jpg">
 					<h1>Deployment</h1>
 					<h5>state of the art </h5>
@@ -329,7 +327,7 @@ rener$@local:~ $<span class="fragment"> ssh rene@123.456.78.910</span>
 					</section>
 
 					<section>
-						<h5>Die Installation</span></h5>
+						<h5>Die Installation</h5>
 						<pre class="fragment terminal type-wrap" style="font-size: 20px">
 -rw-r--r--@ 1 renereimann  staff   946 13 Mai 12:52 <span class="highlight">composer.json</span>
 -rw-r--r--  1 renereimann  staff  8617 13 Mai 12:43 <span class="highlight">composer.lock</span>
@@ -345,7 +343,64 @@ drwxr-xr-x  22 renereimann  staff   748 13 Mai 06:43 <span class="highlight">wp-
 					</pre>
 					</section>
 
-					<section data-background="img/wcber_slide_1.jpg">
+					<section>
+
+						<h2>Vorteile</h2>
+						<ul>
+							<li class="fragment">Volle Kontrolle über Änderungen</li>
+							<li class="fragment">Entwickler haben gleiche Versionen</li>
+							<li class="fragment">Code kann verisoniert werden</li>
+							<li class="fragment">Composer kann Builds & Tests ausführen</li>
+						</ul>
+
+					</section>
+
+					<section>
+
+						<h2>Nachteile</h2>
+						<ul>
+							<li class="fragment">Login auf dem Ziel Server nötig</li>
+							<li class="fragment">Kein Rollback</li>
+						</ul>
+
+					</section>
+
+					<section>
+						<h1>Deployment full Stack</h1>
+						<h3 class="fragment">Mit Deployment Tools</h3>
+						<ul>
+							<li class="fragment">Remote</li>
+							<li class="fragment">Bessere Rechteverwaltung</li>
+							<li class="fragment">Deploys werden Versioniert</li>
+							<li class="fragment">Rollback</li>
+							<li class="fragment">Continuous Integration</li>
+							<li class="fragment">Staging</li>
+						</ul>
+					</section>
+
+					<section>
+						<h5>https://envoyer.io</h5>
+						<img src="img/envoyer.png" style="border:0;width: 650px;background: none;box-shadow:inherit"/>
+					</section>
+
+					<section>
+						<h5>https://de.atlassian.com/software/bamboo</h5>
+						<img src="img/bamboo.png" style="border:0;width: 650px;background: none;box-shadow:inherit"/>
+					</section>
+
+					<section>
+						<h3>https://deployer.org</h3>
+						<h5 class="fragment">Deployer — Deployment tool for PHP</h5>
+						<ul>
+							<li class="fragment">Kostenlos</li>
+							<li class="fragment">läuft lokal</li>
+							<li class="fragment">Rezeptbasierend</li>
+							<li class="fragment">Einfach</li>
+						</ul>
+					</section>
+
+						<section>
+						<h5>Lasst uns etwas deployen</h5>
 						<div class="typecontent" id="line1">
 							<span>dep deploy</span>
 						</div>
@@ -373,6 +428,189 @@ renereimann$@wcber:~ $ <span id="typed" style="white-space:pre;"></span>
 
 					</section>
 
+					<section>
+						<div>
+							<h5>Deploy auf einen Teststage</h5>
+							<pre><code class="hljs">$ dep deploy test</code></pre>
+						</div>
+						<div class="fragment">
+							<h5>Deploy auf einen Production</h5>
+							<pre><code class="hljs">$ dep deploy production</code></pre>
+						</div>
+					</section>
+
+					<section>
+						<h1>Wie Funktioniert das?</h1>
+						<h5 class="fragment">Die deployer.php</h5>
+						<pre class="fragment" style="font-size: 20px"><code class="hljs">
+namespace Deployer;
+require 'recipe/common.php';
+
+// Configuration
+set('default_stage', 'test');
+set('repository', 'git@github.com:derpixler/easy-wordpress-composer-install.git');
+</code></pre>
+					</section>
+
+					<section>
+
+<pre class="fragment" style="font-size: 20px"><code class="hljs">
+server('production', 'p366988.mittwaldserver.info')
+    ->user('p36698')
+	->identityFile('~/.ssh/deployer_id_rsa.pub', '~/.ssh/deployer_id_rsa', '')
+    ->set('deploy_path', '/home/www/p366988/deployment')
+	->set('base_path', '/home/www/p366984')
+	->set('sudo', FALSE)
+	->set('stage', 'preview' )
+	->set('DB_HOST', 'db4686.mydbserver.com' )
+	->set('DB_USERNAME', 'p366988' )
+	->set('DB_PASSWORD', 'usr_p366988_2' )
+	->set('DB_DATABASE', 'Zhivimaq%960' );
+</code></pre>
+						<pre class="fragment" style="font-size: 20px"><code class="hljs">
+server('test', '149.58.155.192')
+    ->user('p36698')
+	->identityFile('~/.ssh/deployer_id_rsa.pub', '~/.ssh/deployer_id_rsa', '')
+    ->set('deploy_path', '/var/www/deployment')
+	->set('base_path', '/var/www/')
+	->set('sudo', TRUE)
+	->set('stage', 'test' )
+	->set('DB_HOST', 'localhost' )
+	->set('DB_USERNAME', 'wordpress' )
+	->set('DB_PASSWORD', 'IKiu2eiqu1shahghievoo9teidoc5ipp' )
+	->set('DB_DATABASE', 'wordpress' );
+</code></pre>
+					</section>
+
+					<section>
+
+<pre class="fragment" style="font-size: 20px"><code class="hljs">
+desc('Deploy your project');
+task('deploy', [
+	'deploy:start_info',
+    'deploy:prepare',
+    'deploy:lock',
+	'deploy:backup_db',
+    'deploy:release',
+    'deploy:update_code',
+    'deploy:shared',
+    'deploy:writable',
+    'deploy:vendors',
+    'deploy:symlink',
+    'deploy:clear_paths',
+    'deploy:unlock',
+    'cleanup',
+    'success'
+]);
+
+after('deploy', 'success');
+</code></pre>
+						</section>
+
+					<section>
+<h5 class="fragment">Eigne Rezepte (tasks)</h5>
+<pre class="fragment" style="font-size: 20px"><code class="hljs">
+/**
+ * Backup DB before deploy
+ *
+ * @siince 13.05.2017
+ */
+desc('Backup DB');
+task('deploy:backup_db', function() {
+
+	$link = run("readlink {{deploy_path}}/current")->toString();
+    $currentRelease = substr($link, 0, 1) === '/' ? $link : get('deploy_path') . '/' . $link;
+
+	$backup_dir = get('deploy_path') . '_db_backup';
+
+	// Create the backup dir if it doesn't exist
+	run( sprintf("if [ ! -d %s ]; then mkdir -p %s; fi", $backup_dir, $backup_dir ) );
+
+    run(sprintf(
+           'mysqldump -h%s -u%s -p%s %s | gzip > %s/%s.sql.gz',
+		   get('DB_HOST'),
+		   get('DB_USERNAME'),
+		   get('DB_PASSWORD'),
+		   get('DB_DATABASE'),
+           $backup_dir,
+           basename( $currentRelease )
+       ));
+
+});
+</code></pre>
+					</section>
+
+					<section>
+						<h5 >Eigne Rezepte (tasks)</h5>
+						<pre style="font-size: 20px"><code class="hljs">
+
+/**
+ * restore last DB Backup after rollback
+ *
+ * @siince 13.05.2017
+ */
+desc('Rollback Deploy');
+task('rollback', function() {
+
+    $releases = get('releases_list');
+
+    if (isset($releases[1])) {
+        $releaseDir = "{{deploy_path}}/releases/{$releases[1]}";
+
+        // Symlink to old release.
+        run("cd {{deploy_path}} && {{bin/symlink}} $releaseDir current");
+
+		// Remove release
+        run("rm -rf {{deploy_path}}/releases/{$releases[0]}");
+
+		$link = run("readlink {{deploy_path}}/current")->toString();
+	    $currentRelease = substr($link, 0, 1) === '/' ? $link : get('deploy_path') . '/' . $link;
+
+		$backup_dir = get('deploy_path') . 'db_backup';
+
+	    run(sprintf(
+	           'gunzip < %s/%s.sql.gz | mysql -h%s -u%s -p%s %s',
+	           $backup_dir,
+	           basename( $currentRelease ),
+			   get('DB_HOST'),
+			   get('DB_USERNAME'),
+			   get('DB_PASSWORD'),
+			   get('DB_DATABASE')
+	       ));
+
+
+
+        writeln("Rollback to `{$releases[1]}` release was successful.");
+
+    } else {
+        writeln("<comment>No more releases you can revert to.</comment>");
+    }
+
+} );
+</code></pre>
+					</section>
+
+
+					<section data-background="img/wcber_slide_6.jpg">
+						<h1>Fagen?</h1>
+					</section>
+
+					<section data-background="img/wcber_slide_7.jpg">
+						<h1>Session Notes</h1>
+						<div style="font-size: 30px">
+							<p>https://github.com/derpixler/Deployment-state-of-the-art</p>
+							<p>https://github.com/derpixler/easy-wordpress-composer-install</p>
+
+							<p>&nbsp;</p>
+
+							<p>www.rene-reimann.de</p>
+							<p>https://twitter.com/DerPixler @DerPixler</p>
+							<p>https://www.instagram.com/rene_reimann</p>
+							<p>https://github.com/derpixler</p>
+							<p>info@rene-reimann.de</p>
+						</div>
+
+					</section>
 
 				</section>
 
