@@ -38,7 +38,7 @@ Auf dem [WordCamp Berlin 2017](https://2017.berlin.wordcamp.org/session/deployme
  * @mail            info@rene-reimann.de
  * @phone           +49 171 83 66 824
  *
- * @twitter         (https://twitter.com/DerPixler)[https://twitter.com/DerPixler]
+ * @twitter         https://twitter.com/DerPixler
  * @instagram       https://www.instagram.com/rene_reimann 
  * @github          https://github.com/derpixler 
  * @gist            https://gist.github.com 
@@ -48,4 +48,4 @@ Auf dem [WordCamp Berlin 2017](https://2017.berlin.wordcamp.org/session/deployme
  * @Behance         https://www.behance.net/rene-reimann
  *
  **/
- ``
+ ```
