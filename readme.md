@@ -4,7 +4,7 @@
 
 # Deployment – state of the art (de)
 
-Auf dem [WordCamp Berlin 2017](https://2017.berlin.wordcamp.org/session/deployment-state-of-the-art/) wurde erklärt was Deployment heißt, warum und wie ein WordPress auf einen Live Server gelangt. In dieser Session wurden Mittel und Methoden vorgestellt wie WordPress/Plugin/Themes, kurz alle Daten rund um WordPress dezentral verwaltet werden können, welche Wege z.B. vom einfachen drag ’n‘ drop -> FTP bis zum automatisierten Deploy möglich sind.
+Auf dem [WordCamp Berlin 2017](https://2017.berlin.wordcamp.org/session/deployment-state-of-the-art/) wurde erklärt, was Deployment heißt, warum und wie ein WordPress auf einen Live Server gelangt. In dieser Session wurden Mittel und Methoden vorgestellt, wie WordPress/Plugin/Themes - kurz alle Daten rund um WordPress - dezentral verwaltet werden können, welche Wege z.B. vom einfachen drag ’n‘ drop -> FTP bis zum automatisierten Deploy möglich sind.
 
 #### Hinweis:
 Punkt 7. (Lasst uns etwas deployen) wird eine `composer.json` aus folgendem Git-Repo verwendet: [Easy-WordPress-Composer-Install](https://github.com/derpixler/easy-wordpress-composer-install)
