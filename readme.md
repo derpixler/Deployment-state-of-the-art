@@ -22,4 +22,30 @@ Auf dem [WordCamp Berlin 2017](https://2017.berlin.wordcamp.org/session/deployme
        - Services: envoyer.io, Atlassian Bamboo
        - Self hosted: deploy.org
 7. Lasst uns etwas deployen.
-8. Session Notes       
+8. Session Notes
+       
+### Über mich
+```
+/**
+ * Hallo, mein Name ist René Reimann
+ *
+ * ich bin WordPress Professional, ausgebildeter Mediengestalter für Digital- & Printmedien,
+ * Webentwickler, Webdesigner, Podcaster, Berater, Ausbilder, Mitglied in der
+ * IHK-Prüfkommission (Mediengestalter für Digital & Printmedien) kurzum
+ * Senior Fullstack Developer und das allerbeste ein Vater & Ehemann.
+ *
+ * @author          Rene Reimann 
+ * @mail            info@rene-reimann.de
+ * @phone           +49 171 83 66 824
+ *
+ * @twitter         https://twitter.com/DerPixler
+ * @instagram       https://www.instagram.com/rene_reimann 
+ * @github          https://github.com/derpixler 
+ * @gist            https://gist.github.com 
+ * @WordPress       https://profiles.wordpress.org/derpixler 
+ * @Xing            https://www.xing.com/profile/Rene_Reimann 
+ * @WP_Sofa         http://wp-sofa.de 
+ * @Behance         https://www.behance.net/rene-reimann
+ *
+ **/
+ ```
