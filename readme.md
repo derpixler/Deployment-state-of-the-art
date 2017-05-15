@@ -2,6 +2,9 @@
 
 Auf dem [WordCamp Berlin 2017](https://2017.berlin.wordcamp.org/session/deployment-state-of-the-art/) wurde erklärt was Deployment heißt, warum und wie ein WordPress auf einen Live Server gelangt. In dieser Session wurden Mittel und Methoden vorgestellt wie WordPress/Plugin/Themes, kurz alle Daten rund um WordPress dezentral verwaltet werden können, welche Wege z.B. vom einfachen drag ’n‘ drop -> FTP bis zum automatisierten Deploy möglich sind.
 
+*Hinweis:* Punkt 7. (Lasst uns etwas deployen) wird eine `composer.json` aus folgendem Git-Repo verwendet.
+[Easy WordPress Composer Install](https://github.com/derpixler/easy-wordpress-composer-install)
+
 ![bildschirmfoto 2017-05-15 um 08 36 12](https://cloud.githubusercontent.com/assets/809219/26045249/9efcab3e-3949-11e7-9a93-14fe5647ecd7.png)
 
 ### Überblick der Folien
@@ -44,7 +47,7 @@ Auf dem [WordCamp Berlin 2017](https://2017.berlin.wordcamp.org/session/deployme
  * @gist            https://gist.github.com 
  * @WordPress       https://profiles.wordpress.org/derpixler 
  * @Xing            https://www.xing.com/profile/Rene_Reimann 
- * @WP_Sofa         http://wp-sofa.de 
+ * @WP_Sofa         https://wp-sofa.de 
  * @Behance         https://www.behance.net/rene-reimann
  *
  **/
